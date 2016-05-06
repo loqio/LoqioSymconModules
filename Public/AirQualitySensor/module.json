@@ -1,0 +1,14 @@
+{
+  "id": "{45998026-7967-4BF1-97FC-C293CA7059CB}",
+  "name": "E-Service Online 1-Wire Air Quality Sensor",
+  "type": 3,
+  "vendor": "Loqio",
+  "aliases":
+  [
+    "E-Service Online 1-Wire Luftqualitätssensor"
+  ],
+  "parentRequirements": [],
+  "childRequirements": [],
+  "implemented": [],
+  "prefix": "AIRQ"
+}
