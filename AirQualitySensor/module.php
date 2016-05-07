@@ -19,7 +19,11 @@ class AirQualitySensor extends IPSModule
 
 		if ($sensorId = $this->ReadPropertyInteger('sensorInstanceId'))
 		{
-			$this->setTriggerEvent();
+			if ($this->hasTriggerEvent() == false)
+			{
+				$this->setTriggerEvent();
+			}
+
 		}
 
 		//$this->Compute($this->InstanceID);
@@ -80,6 +84,11 @@ class AirQualitySensor extends IPSModule
 		}
 
 		return $triggerEventId;
+	}
+
+	private function hasTriggerEvent()
+	{
+		return $this->getTriggerEventId() ? true : false;
 	}
 
 	private function getVadVariableId()
