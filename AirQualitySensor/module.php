@@ -22,7 +22,7 @@ class AirQualitySensor extends IPSModule
 			$this->setTriggerEvent();
 		}
 
-		$this->Compute($this->InstanceID);
+		//$this->Compute($this->InstanceID);
 
 
 
