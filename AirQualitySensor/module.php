@@ -1,7 +1,5 @@
 <?
 
-/** The AirQualitySensor module computes the CO2 equivalence from the output of the eService 1-Wire air quality sensor
-  */
 class AirQualitySensor extends IPSModule
 {
 
@@ -11,7 +9,7 @@ class AirQualitySensor extends IPSModule
 		parent::Create();
 
 
-		$this->RegisterPropertyInteger("sensorInstance", 0);
+		//$this->RegisterPropertyInteger("sensorInstance", 0);
 	}
 
 	public function ApplyChanges()
@@ -35,18 +33,6 @@ class AirQualitySensor extends IPSModule
 		// Setzt den Intervall des Timers "Update" auf 5 Sekunden
 		$this->SetTimerInterval("Update", 5000);*/
 
-	}
-
-	/**
-	  * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
-	  * Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wiefolgt zur Verfügung gestellt:
-	  *
-	  * ABC_MeineErsteEigeneFunktion($id);
-	  *
-	  */
-	public function MeineErsteEigeneFunktion()
-	{
-		// Selbsterstellter Code
 	}
 }
 ?>

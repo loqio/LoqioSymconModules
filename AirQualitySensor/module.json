@@ -5,10 +5,11 @@
   "vendor": "Loqio",
   "aliases":
   [
-    "E-Service Online 1-Wire Luftqualitätssensor"
+    "E-Service Online 1-Wire Luftqualitätssensor",
+    "E-Service Online 1-Wire Air Quality Sensor"
   ],
-  "parentRequirements": [],
-  "childRequirements": [],
-  "implemented": [],
+  "parentRequirements": [""],
+  "childRequirements": [""],
+  "implemented": [""],
   "prefix": "AIRQ"
 }
