@@ -20,7 +20,7 @@ class AirQualitySensor extends IPSModule
 		if ($sensorId = $this->ReadPropertyInteger('sensorInstanceId'))
 		{
 			$this->setTriggerEvent();
-		)
+		}
 
 		$this->Compute($this->InstanceID);
 
@@ -58,8 +58,6 @@ class AirQualitySensor extends IPSModule
 			IPS_SetEventActive($triggerEventId, true);
 			IPS_SetEventScript($triggerEventId, "AIRQ_Compute(" . $_IPS['TARGET'] . ")");
 		}
-
-
 	}
 
 	private function getTriggerEventId()
