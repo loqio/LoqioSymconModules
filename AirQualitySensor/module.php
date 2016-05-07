@@ -43,15 +43,15 @@ class AirQualitySensor extends IPSModule
 	{
 		$sensorId = $this->ReadPropertyInteger('sensorInstance');
 
-		if (is_int($sensorId))
+		if ($sensorId)
 		{
 			$vadId = IPS_GetObjectIdByName('VAD', $sensorId);
 			$xsensId = IPS_GetObjectIdByName('XSENS', $sensorId);
 
 			if (is_int($vadId) && is_int($xsensId))
 			{
-				$vad = IPS_GetValue($vadId);
-				$xsens = IPS_GetValue($xsensId);
+				$vad = GetValue($vadId);
+				$xsens = GetValue($xsensId);
 
 				IPS_LogMessage('Air quality sensor', 'vad: ' . $vad . ' xsens: ' . $xsens);
 
