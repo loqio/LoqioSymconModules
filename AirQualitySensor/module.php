@@ -10,6 +10,8 @@ class AirQualitySensor extends IPSModule
 
 
 		$this->RegisterPropertyInteger("sensorInstance", 0);
+
+		$this->ConnectParent("{301FA314-65F8-4317-8BF5-729CF8664F54}");
 	}
 
 	public function ApplyChanges()
