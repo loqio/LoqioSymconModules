@@ -9,7 +9,7 @@ class AirQualitySensor extends IPSModule
 		parent::Create();
 
 
-		$this->RegisterPropertyInteger('sensorInstance', 0);
+		$this->RegisterPropertyInteger('sensorInstanceId', 0);
 	}
 
 	public function ApplyChanges()
@@ -17,7 +17,8 @@ class AirQualitySensor extends IPSModule
 		// Never delete this line
 		parent::ApplyChanges();
 
-		$this->Compute();
+
+		$this->Compute($this->instanceID);
 
 
 
@@ -39,16 +40,55 @@ class AirQualitySensor extends IPSModule
 
 	}
 
-	public function Compute()
+	public function Compute($instanceId)
 	{
-		$sensorId = $this->ReadPropertyInteger('sensorInstance');
+		IPS_LogMessage('Air quality sensor', 'instanceId: ' . $this->InstanceID);
+	}
 
-		if ($sensorId)
+	private function setTriggerEvent()
+	{
+		if ($triggerEventId = IPS_CreateEvent(0))
 		{
-			$vadId = IPS_GetObjectIdByName('VAD', $sensorId);
-			$xsensId = IPS_GetObjectIdByName('XSENS', $sensorId);
+			IPS_SetEventTrigger($triggerEventId, 1, 15754);        //Bei Änderung von Variable mit ID 15754
+			IPS_SetParent($triggerEventId, $this->InstanceID);
+			IPS_SetEventActive($triggerEventId, true);
+			IPS_SetEventScript($triggerEventId, "AIRQ_Compute(" . $_IPS['TARGET'] . ")");
+		}
 
-			if (is_int($vadId) && is_int($xsensId))
+
+	}
+
+	private function getTriggerEventId()
+	{
+		$childrenIds = IPS_GetChildrenIDs($this->InstanceID);
+		$triggerEventId = false;
+
+		if (count($childrenIds))
+		{
+			foreach ($childrenIds as $childId)
+			{
+				$object = IPS_GetObject($childId);
+
+				if ($object['ObjectType'] == 4)
+				{
+					$triggerEventId = $object['ObjectID'];
+					break;
+				}
+			}
+		}
+
+		return $triggerEventId;
+	}
+
+	private function getVadVariableId()
+	{
+		$vadVariableId = false;
+
+		if ($sensorId = $this->ReadPropertyInteger('sensorInstanceId'))
+		{
+			$vadVariableId = IPS_GetObjectIdByName('VAD', $sensorId);
+
+			/*if (is_int($vadId) && is_int($xsensId))
 			{
 				$vad = GetValue($vadId);
 				$xsens = GetValue($xsensId);
@@ -56,8 +96,22 @@ class AirQualitySensor extends IPSModule
 				IPS_LogMessage('Air quality sensor', 'vad: ' . $vad . ' xsens: ' . $xsens);
 
 
-			}
+			}*/
 		}
+
+		return $vadVariableId;
+	}
+
+	private function getXsensVariableId()
+	{
+		$xsensVariableId = false;
+
+		if ($sensorId = $this->ReadPropertyInteger('sensorInstanceId'))
+		{
+			$xsensVariableId = IPS_GetObjectIdByName('XSENS', $sensorId);
+		}
+
+		return $xsensVariableId;
 	}
 }
 ?>

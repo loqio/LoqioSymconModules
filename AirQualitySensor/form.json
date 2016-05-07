@@ -1,7 +1,7 @@
 {
   "elements":
   [
-    { "type": "SelectInstance", "name": "sensorInstance", "caption": "Sensor instance" },
+    { "type": "SelectInstance", "name": "sensorInstanceId", "caption": "Sensor instance" },
     { "type": "Label", "label": "Please select the 1-Wire instance of the eService air quality sensor." }
   ]
 }
