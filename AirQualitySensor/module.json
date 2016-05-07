@@ -1,12 +1,12 @@
 {
   "id": "{45998026-7967-4BF1-97FC-C293CA7059CB}",
-  "name": "EService Online 1-Wire Air Quality Sensor",
+  "name": "EService Online 1Wire Air Quality Sensor",
   "type": 3,
   "vendor": "Loqio",
   "aliases":
   [
-    "EService Online 1-Wire Luftqualitätssensor",
-    "EService Online 1-Wire Air Quality Sensor"
+    "EService Online 1Wire Luftqualitätssensor",
+    "EService Online 1Wire Air Quality Sensor"
   ],
   "parentRequirements": [""],
   "childRequirements": [""],
