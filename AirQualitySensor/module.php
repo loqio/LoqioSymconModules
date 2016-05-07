@@ -9,14 +9,14 @@ class AirQualitySensor extends IPSModule
 		parent::Create();
 
 
-		//$this->RegisterPropertyInteger("sensorInstance", 0);
+		$this->RegisterPropertyInteger("sensorInstance", 0);
 	}
 
 	public function ApplyChanges()
 	{
 		// Never delete this line
 		parent::ApplyChanges();
-
+		
 		//$this->sensorInstanceId = $this->ReadPropertyString("sensorInstance");
 
 		/*$updateClientsScript = file_get_contents(__DIR__ . "/createClientList.php");
