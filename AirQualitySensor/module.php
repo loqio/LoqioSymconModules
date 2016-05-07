@@ -17,6 +17,8 @@ class AirQualitySensor extends IPSModule
 		// Never delete this line
 		parent::ApplyChanges();
 
+		$this->Compute();
+
 
 
 		//$this->sensorInstanceId = $this->ReadPropertyString("sensorInstance");
