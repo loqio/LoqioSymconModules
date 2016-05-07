@@ -48,7 +48,7 @@ class AirQualitySensor extends IPSModule
 
 	}
 
-	public function Compute($instanceId)
+	public function Compute()
 	{
 		IPS_LogMessage('Air quality sensor', 'instanceId: ' . $this->InstanceID);
 	}
