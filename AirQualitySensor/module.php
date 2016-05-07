@@ -16,7 +16,7 @@ class AirQualitySensor extends IPSModule
 	{
 		// Never delete this line
 		parent::ApplyChanges();
-		
+
 		//$this->sensorInstanceId = $this->ReadPropertyString("sensorInstance");
 
 		/*$updateClientsScript = file_get_contents(__DIR__ . "/createClientList.php");
@@ -31,7 +31,7 @@ class AirQualitySensor extends IPSModule
 
 
 		// Setzt den Intervall des Timers "Update" auf 5 Sekunden
-		$this->SetTimerInterval("Update", 5000);*/
+		$this->SetTimerInterval("Update", 3000);*/
 
 	}
 }
