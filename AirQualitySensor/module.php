@@ -56,7 +56,7 @@ class AirQualitySensor extends IPSModule
 			IPS_SetEventTrigger($triggerEventId, 1, 15754);        //Bei Änderung von Variable mit ID 15754
 			IPS_SetParent($triggerEventId, $this->InstanceID);
 			IPS_SetEventActive($triggerEventId, true);
-			IPS_SetEventScript($triggerEventId, "AIRQ_Compute(" . $_IPS['TARGET'] . ")");
+			IPS_SetEventScript($triggerEventId, "AIRQ_Compute(" . $IPS['TARGET'] . ")");
 		}
 	}
 
