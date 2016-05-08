@@ -112,13 +112,6 @@ class AirQualitySensor extends IPSModule
 			SetValueInteger($this->GetIDForIdent('voc'), round($voc));
 			SetValueInteger($this->GetIDForIdent('airQuality'), $airQualityIndex);
 
-
-			/*$this->setTemperature($temperature);
-			$this->setHumidity($humidity);
-			$this->setDewPoint($dewPoint);
-			$this->setVolatileOrganicCompounds($voc);
-			$this->setAirQualityIndex($airQualityIndex);*/
-
 			$success = true;
 
 			$this->SetStatus(102);
@@ -127,9 +120,7 @@ class AirQualitySensor extends IPSModule
 		{
 			$this->setStatus(200);
 		}
-
-
-
+		
 		return $success;
 	}
 
@@ -279,131 +270,8 @@ class AirQualitySensor extends IPSModule
 		else{
 			$index = 3;
 		}
+
+		return $index;
 	}
-
-	/** Returns a human friendly description of the air quality
-	 * @param int $index: air quality index
-	 * @return string
-	 */
-	/*private function getAirQualityDescription($index)
-	{
-		$languageId = $this->ReadPropertyInteger('languageId');
-
-		// Translations in languageId => index format
-		$translations = array(
-			0 => array(1 => 'good', 2 => 'sufficient', 	3 => 'bad'),
-			1 => array(1 => 'gut', 	2 => 'ausreichend', 3 => 'schlecht'),
-			3 => array(1 => 'goed', 2 => 'voldoende', 	3 => 'slecht')
-		);
-
-		return $translations[$languageId][$index];
-	}*/
-
-
-	/** Creates and sets the temperature status variable
-	 * @param float $$temperature
-	 * @return boolean: true if successful, false on failure
-	 */
-	private function setTemperature($temperature)
-	{
-		$variableId = $this->GetIDForIdent('temperature');
-
-		/*/ Create status variable if variable not set
-		if ($variableId == false)
-		{
-			$variableId = $this->registerVariableFloat('temperature', 'Temperature', '~Temperature', 0);
-		}*/
-
-		return SetValueFloat($variableId, round($$temperature, 1));
-	}
-
-	/** Creates and sets the humidity status variable
-	  * @param float $humidity
-	  * @return boolean: true if successful, false on failure
-	  */
-	private function setHumidity($humidity)
-	{
-		$variableId = $this->GetIDForIdent('humidity');
-
-		/*/ Create status variable if variable not set
-		if ($variableId == false)
-		{
-			$variableId = $this->registerVariableFloat('humidity', 'Humidity', '~Humidity.F', 1);
-		}*/
-
-		return SetValueFloat($variableId, round($humidity, 1));
-	}
-
-	/** Creates and sets the dew point status variable
-	 * @param float $dewPoint
-	 * @return boolean: true if successful, false on failure
-	 */
-	private function setDewPoint($dewPoint)
-	{
-		$variableId = $this->GetIDForIdent('dewPoint');
-
-		/*/ Create status variable if variable not set
-		if ($variableId == false)
-		{
-			$variableId = $this->registerVariableFloat('dewPoint', 'Dew point', '~Temperature', 2);
-		}*/
-
-		return SetValueFloat($variableId, round($dewPoint, 1));
-	}
-
-	/** Creates and sets the VOC status variable
-	 * @param float $voc
-	 * @return boolean: true if successful, false on failure
-	 */
-	private function setVolatileOrganicCompounds($voc)
-	{
-		$variableId = $this->GetIDForIdent('voc');
-
-		/*/ Create status variable if variable not set
-		if ($variableId == false)
-		{
-			// Create variable profile
-			if (IPS_GetVariableProfile('VolatileOrganicCompounds') == false)
-			{
-				IPS_CreateVariableProfile('VolatileOrganicCompounds', 1);
-				IPS_SetVariableProfileText('VolatileOrganicCompounds', '', 'ppm');
-				IPS_SetVariableProfileIcon('VolatileOrganicCompounds', 'ErlenmeyerFlask');
-				IPS_SetVariableProfileValues('VolatileOrganicCompounds', 0, 2000, 250);
-			}
-
-			$variableId = $this->registerVariableInteger('voc', 'Volatile organic compounds', 'VolatileOrganicCompounds', 3);
-		}*/
-
-		return SetValueInteger($variableId, round($voc));
-	}
-
-	/** Creates and sets the air quality index status variable
-	 * @param int $airQualityIndex
-	 * @return boolean: true if successful, false on failure
-	 */
-	private function setAirQualityIndex($airQualityIndex)
-	{
-		$variableId = $this->GetIDForIdent('airQualityIndex');
-
-		/*/ Create status variable if variable not set
-		if ($variableId == false)
-		{
-			// Create variable profile
-			if (IPS_GetVariableProfile('AirQuality') == false)
-			{
-				IPS_CreateVariableProfile('AirQuality', 1);
-				IPS_SetVariableProfileIcon('AirQuality', 'Climate');
-				IPS_SetVariableProfileAssociation('AirQuality', 1, 'Good', 'Climate', 0x64af3f);
-				IPS_SetVariableProfileAssociation('AirQuality', 2, 'Sufficient', 'Climate', 0x93af3f);
-				IPS_SetVariableProfileAssociation('AirQuality', 2, 'Bad', 'Warning', 0xaf4c3f);
-			}
-
-			$variableId = $this->registerVariableInteger('airQualityIndex', 'Air quality', 'AirQuality', 4);
-		}*/
-
-		return SetValueInteger($variableId, $airQualityIndex);
-	}
-
-
 }
 ?>
