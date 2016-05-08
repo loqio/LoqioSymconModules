@@ -15,8 +15,8 @@ class AirQualitySensor extends IPSModule
 		if (IPS_GetVariableProfile('VolatileOrganicCompounds') == false)
 		{
 			IPS_CreateVariableProfile('VolatileOrganicCompounds', 1);
-			IPS_SetVariableProfileText('VolatileOrganicCompounds', '', 'ppm');
-			IPS_SetVariableProfileIcon('VolatileOrganicCompounds', 'ErlenmeyerFlask');
+			IPS_SetVariableProfileText('VolatileOrganicCompounds', '', ' ppm');
+			IPS_SetVariableProfileIcon('VolatileOrganicCompounds', 'Intensity');
 			IPS_SetVariableProfileValues('VolatileOrganicCompounds', 0, 2000, 250);
 		}
 
@@ -44,6 +44,7 @@ class AirQualitySensor extends IPSModule
 			IPS_SetIdent($eventId, 'updateEvent');
 			IPS_SetName($eventId, "Update values");
 			IPS_SetHidden($eventId, true);
+			IPS_SetPosition($eventId, 5);
 		}
 	}
 
