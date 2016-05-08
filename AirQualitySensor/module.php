@@ -10,7 +10,6 @@ class AirQualitySensor extends IPSModule
 
 
 		$this->RegisterPropertyInteger('sensorInstanceId', 0);
-		$this->SetStatus(101);
 	}
 
 	public function ApplyChanges()
@@ -87,7 +86,7 @@ class AirQualitySensor extends IPSModule
 		}
 		else
 		{
-			$this->setStatus(201);
+			$this->setStatus(200);
 		}
 
 		// Update humidity
