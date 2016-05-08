@@ -10,6 +10,31 @@ class AirQualitySensor extends IPSModule
 
 
 		$this->RegisterPropertyInteger('sensorInstanceId', 0);
+
+		// Create variable profiles
+		if (IPS_GetVariableProfile('VolatileOrganicCompounds') == false)
+		{
+			IPS_CreateVariableProfile('VolatileOrganicCompounds', 1);
+			IPS_SetVariableProfileText('VolatileOrganicCompounds', '', 'ppm');
+			IPS_SetVariableProfileIcon('VolatileOrganicCompounds', 'ErlenmeyerFlask');
+			IPS_SetVariableProfileValues('VolatileOrganicCompounds', 0, 2000, 250);
+		}
+
+		if (IPS_GetVariableProfile('AirQuality') == false)
+		{
+			IPS_CreateVariableProfile('AirQuality', 1);
+			IPS_SetVariableProfileIcon('AirQuality', 'Climate');
+			IPS_SetVariableProfileAssociation('AirQuality', 1, 'Good', 'Climate', 0x64af3f);
+			IPS_SetVariableProfileAssociation('AirQuality', 2, 'Sufficient', 'Climate', 0x93af3f);
+			IPS_SetVariableProfileAssociation('AirQuality', 3, 'Bad', 'Warning', 0xaf4c3f);
+		}
+
+		// Create status variables
+		$this->registerVariableFloat('temperature', 'Temperature', '~Temperature', 0);
+		$this->registerVariableFloat('humidity', 'Humidity', '~Humidity.F', 1);
+		$this->registerVariableFloat('dewPoint', 'Dew point', '~Temperature', 2);
+		$this->registerVariableInteger('voc', 'Volatile organic compounds', 'VolatileOrganicCompounds', 3);
+		$this->registerVariableInteger('airQuality', 'Air quality', 'AirQuality', 4);
 	}
 
 	public function ApplyChanges()
@@ -77,6 +102,14 @@ class AirQualitySensor extends IPSModule
 
 			// Update humidity
 			IPS_LogMessage('Air quality sensor', 'instanceId: ' . $this->InstanceID . ' humidity: ' . $humidity . ' dew point: ' . $dewPoint . ' voc: ' . $voc . ' air quality index: ' . $airQualityIndex);
+
+
+			SetValueFloat(GetIDForIdent('temperature'), round($temperature, 1));
+			SetValueFloat(GetIDForIdent('humidity'), round($humidity, 1));
+			SetValueFloat(GetIDForIdent('dewPoint'), round($dewPoint, 1));
+			SetValueInteger(GetIDForIdent('voc'), round($voc));
+			SetValueInteger(GetIDForIdent('airQuality'), $airQualityIndex);
+
 
 			/*$this->setTemperature($temperature);
 			$this->setHumidity($humidity);
@@ -284,11 +317,11 @@ class AirQualitySensor extends IPSModule
 	{
 		$variableId = $this->GetIDForIdent('temperature');
 
-		// Create status variable if variable not set
+		/*/ Create status variable if variable not set
 		if ($variableId == false)
 		{
 			$variableId = $this->registerVariableFloat('temperature', 'Temperature', '~Temperature', 0);
-		}
+		}*/
 
 		return SetValueFloat($variableId, round($$temperature, 1));
 	}
@@ -301,11 +334,11 @@ class AirQualitySensor extends IPSModule
 	{
 		$variableId = $this->GetIDForIdent('humidity');
 
-		// Create status variable if variable not set
+		/*/ Create status variable if variable not set
 		if ($variableId == false)
 		{
 			$variableId = $this->registerVariableFloat('humidity', 'Humidity', '~Humidity.F', 1);
-		}
+		}*/
 
 		return SetValueFloat($variableId, round($humidity, 1));
 	}
@@ -318,11 +351,11 @@ class AirQualitySensor extends IPSModule
 	{
 		$variableId = $this->GetIDForIdent('dewPoint');
 
-		// Create status variable if variable not set
+		/*/ Create status variable if variable not set
 		if ($variableId == false)
 		{
 			$variableId = $this->registerVariableFloat('dewPoint', 'Dew point', '~Temperature', 2);
-		}
+		}*/
 
 		return SetValueFloat($variableId, round($dewPoint, 1));
 	}
@@ -335,7 +368,7 @@ class AirQualitySensor extends IPSModule
 	{
 		$variableId = $this->GetIDForIdent('voc');
 
-		// Create status variable if variable not set
+		/*/ Create status variable if variable not set
 		if ($variableId == false)
 		{
 			// Create variable profile
@@ -348,7 +381,7 @@ class AirQualitySensor extends IPSModule
 			}
 
 			$variableId = $this->registerVariableInteger('voc', 'Volatile organic compounds', 'VolatileOrganicCompounds', 3);
-		}
+		}*/
 
 		return SetValueInteger($variableId, round($voc));
 	}
@@ -361,7 +394,7 @@ class AirQualitySensor extends IPSModule
 	{
 		$variableId = $this->GetIDForIdent('airQualityIndex');
 
-		// Create status variable if variable not set
+		/*/ Create status variable if variable not set
 		if ($variableId == false)
 		{
 			// Create variable profile
@@ -375,7 +408,7 @@ class AirQualitySensor extends IPSModule
 			}
 
 			$variableId = $this->registerVariableInteger('airQualityIndex', 'Air quality', 'AirQuality', 4);
-		}
+		}*/
 
 		return SetValueInteger($variableId, $airQualityIndex);
 	}
