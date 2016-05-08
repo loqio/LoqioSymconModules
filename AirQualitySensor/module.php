@@ -43,6 +43,7 @@ class AirQualitySensor extends IPSModule
 			IPS_SetParent($eventId, $this->InstanceID);
 			IPS_SetIdent($eventId, 'updateEvent');
 			IPS_SetName($eventId, "Update values");
+			IPS_SetHidden($eventId);
 		}
 	}
 
