@@ -87,6 +87,9 @@ class AirQualitySensor extends IPSModule
 	{
 		$success = false;
 
+		// Sleep for two seconds to make sure all variables of the sensor instance have been updated
+		IPS_Sleep(2000);
+
 		$vadVariableId 			= $this->getVadVariableId();
 		$vddVariableId 			= $this->getVddVariableId();
 		$temperatureVariableId 	= $this->getTemperatureVariableId();
