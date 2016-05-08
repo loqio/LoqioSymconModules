@@ -8,7 +8,6 @@ class AirQualitySensor extends IPSModule
 		// Never delete this line
 		parent::Create();
 
-
 		$this->RegisterPropertyInteger('sensorInstanceId', 0);
 
 		// Create variable profiles
@@ -131,7 +130,7 @@ class AirQualitySensor extends IPSModule
 
 	private function setUpdateEvent()
 	{
-		$variableId = $this->getTemperatureVariableId();
+		$variableId = $this->getXsensVariableId();
 
 		if ($variableId)
 		{
@@ -143,14 +142,10 @@ class AirQualitySensor extends IPSModule
 		}
 	}
 
+	/**  */
 	private function getUpdateEventId()
 	{
 		return @IPS_GetObjectIDByIdent('updateEvent', $this->InstanceID);
-	}
-
-	private function hasUpdateEvent()
-	{
-		return $this->getUpdateEventId() ? true : false;
 	}
 
 	/** Returns the object id of variable having name $variableName and parent sensorInstanceId
@@ -205,7 +200,7 @@ class AirQualitySensor extends IPSModule
 	 */
 	private function calculateHumidity($vdd, $vad, $temperature)
 	{
-		// Vad measurement compensation in case of Vdd undervoltage
+		// Vad measurement compensation in case of Vdd under voltage
 		$vad = (5 / $vdd) * $vad;
 
 		// Air quality sensor constants
@@ -238,7 +233,7 @@ class AirQualitySensor extends IPSModule
 			$b = 240.7;
 		}
 
-		// Magnusformel
+		// Magnus formula
 		$sdd = 6.1078 * pow(10.0, (($a * $temperature) / ($b + $temperature))); // Saturation vapor pressure
 		$dd = ($humidity / 100.0) * $sdd; // Vapor pressure
 		$v = log10(($dd / 6.1078));
