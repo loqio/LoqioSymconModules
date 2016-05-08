@@ -161,7 +161,7 @@ class AirQualitySensor extends IPSModule
 
 		if ($sensorId = $this->ReadPropertyInteger('sensorInstanceId'))
 		{
-			$variableId = IPS_GetObjectIdByName($variableName, $sensorId);
+			$variableId = @IPS_GetObjectIdByName($variableName, $sensorId);
 		}
 
 		return $variableId;
