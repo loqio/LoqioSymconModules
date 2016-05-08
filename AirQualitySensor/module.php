@@ -104,11 +104,11 @@ class AirQualitySensor extends IPSModule
 			IPS_LogMessage('Air quality sensor', 'instanceId: ' . $this->InstanceID . ' humidity: ' . $humidity . ' dew point: ' . $dewPoint . ' voc: ' . $voc . ' air quality index: ' . $airQualityIndex);
 
 
-			SetValueFloat(GetIDForIdent('temperature'), round($temperature, 1));
-			SetValueFloat(GetIDForIdent('humidity'), round($humidity, 1));
-			SetValueFloat(GetIDForIdent('dewPoint'), round($dewPoint, 1));
-			SetValueInteger(GetIDForIdent('voc'), round($voc));
-			SetValueInteger(GetIDForIdent('airQuality'), $airQualityIndex);
+			SetValueFloat($this->GetIDForIdent('temperature'), round($temperature, 1));
+			SetValueFloat($this->GetIDForIdent('humidity'), round($humidity, 1));
+			SetValueFloat($this->GetIDForIdent('dewPoint'), round($dewPoint, 1));
+			SetValueInteger($this->GetIDForIdent('voc'), round($voc));
+			SetValueInteger($this->GetIDForIdent('airQuality'), $airQualityIndex);
 
 
 			/*$this->setTemperature($temperature);
