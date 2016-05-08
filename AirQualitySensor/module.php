@@ -142,7 +142,9 @@ class AirQualitySensor extends IPSModule
 		}
 	}
 
-	/**  */
+	/** Returns object id for update event
+	 * @return int
+	 */
 	private function getUpdateEventId()
 	{
 		return @IPS_GetObjectIDByIdent('updateEvent', $this->InstanceID);
