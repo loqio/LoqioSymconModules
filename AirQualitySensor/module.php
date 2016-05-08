@@ -2,7 +2,6 @@
 
 class AirQualitySensor extends IPSModule
 {
-
 	public function Create()
 	{
 		// Never delete this line
@@ -124,17 +123,17 @@ class AirQualitySensor extends IPSModule
 	}
 
 	/** Returns object id for update event
-	 * @return int
-	 */
+	  * @return int
+	  */
 	private function getUpdateEventId()
 	{
 		return @IPS_GetObjectIDByIdent('updateEvent', $this->InstanceID);
 	}
 
 	/** Returns the object id of variable having name $variableName and parent sensorInstanceId
-	 * @param string $variableName: name of variable
-	 * @return bool|int: false if variable not found, int if variable found
-	 */
+	  * @param string $variableName: name of variable
+	  * @return bool|int: false if variable not found, int if variable found
+	  */
 	private function getSensorVariableId($variableName)
 	{
 		$variableId = false;
@@ -148,39 +147,39 @@ class AirQualitySensor extends IPSModule
 	}
 
 	/** Returns the object id of the 'Temperature' variable
-	 */
+	  */
 	private function getTemperatureVariableId()
 	{
 		return $this->getSensorVariableId('Temperature');
 	}
 
 	/** Returns the object id of the 'VAD' variable
-	 */
+	  */
 	private function getVadVariableId()
 	{
 		return $this->getSensorVariableId('VAD');
 	}
 
 	/** Returns the object id of the 'VDD' variable
-	 */
+	  */
 	private function getVddVariableId()
 	{
 		return $this->getSensorVariableId('VDD');
 	}
 
 	/** Returns the object id of the 'XSENS' variable
-	 */
+	  */
 	private function getXsensVariableId()
 	{
 		return $this->getSensorVariableId('XSENS');
 	}
 
 	/** Calculates humidity using vad voltage and temperature
-	 * @param float $vdd: sensor supply voltage
-	 * @param float $vad: sensor analog voltage reading
-	 * @param float $temperature: temperature reading from sensor
-	 * @return float
-	 */
+	  * @param float $vdd: sensor supply voltage
+	  * @param float $vad: sensor analog voltage reading
+	  * @param float $temperature: temperature reading from sensor
+	  * @return float
+	  */
 	private function calculateHumidity($vdd, $vad, $temperature)
 	{
 		// Vad measurement compensation in case of Vdd under voltage
@@ -229,9 +228,9 @@ class AirQualitySensor extends IPSModule
 	}
 
 	/** Calculates volatile organic compounds level in parts per million using xsens reading
-	 * @param float $xsens: xsens reading from sensor
-	 * @return float: $voc
-	 */
+	  * @param float $xsens: xsens reading from sensor
+	  * @return float: $voc
+	  */
 	private function calculateVolatileOrganicCompounds($xsens)
 	{
 		$factor = 12600; //Firmware 1.4, CO2 Umgebung = 400-420, je nach Wohnlage (Großstadt = 420, Ländlich = 400)
@@ -241,9 +240,9 @@ class AirQualitySensor extends IPSModule
 	}
 
 	/** Returns the air quality index
-	 * @param float $voc: volatile organic compouns level
-	 * @return int: 1 = good, 2 = sufficient, 3 = bad
-	 */
+	  * @param float $voc: volatile organic compouns level
+	  * @return int: 1 = good, 2 = sufficient, 3 = bad
+	  */
 	private function getAirQualityIndex($voc)
 	{
 		if ($voc <= 850)
