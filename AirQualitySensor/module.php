@@ -100,7 +100,7 @@ class AirQualitySensor extends IPSModule
 			$temperature 		= GetValueFloat($temperatureVariableId);
 			$xsens			 	= GetValueFloat($xsensVariableId);
 
-			$humidity 			= $this->calculateHumidity($vad, $temperature);
+			$humidity 			= $this->calculateHumidity($vdd, $vad, $temperature);
 			$dewPoint 			= $this->calculateDewPoint($temperature, $humidity);
 			$voc				= $this->calculateVolatileOrganicCompounds($xsens);
 			$airQualityIndex	= $this->getAirQualityIndex($voc);
@@ -198,12 +198,16 @@ class AirQualitySensor extends IPSModule
 	}
 
 	/** Calculates humidity using vad voltage and temperature
-	 * @param float $vad: voltage reading from sensor
+	 * @param float $vdd: sensor supply voltage
+	 * @param float $vad: sensor analog voltage reading
 	 * @param float $temperature: temperature reading from sensor
 	 * @return float
 	 */
-	private function calculateHumidity($vad, $temperature)
+	private function calculateHumidity($vdd, $vad, $temperature)
 	{
+		// Vad measurement compensation in case of Vdd undervoltage
+		$vad = (5 / $vdd) * $vad;
+
 		// Air quality sensor constants
 		$offset = 0.847847; // Zero Offset V
 		$slope = 29.404604; // Slope: mV/%RH
@@ -272,7 +276,8 @@ class AirQualitySensor extends IPSModule
 		{
 			$index = 2;
 		}
-		else{
+		else
+		{
 			$index = 3;
 		}
 
