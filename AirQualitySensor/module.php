@@ -37,10 +37,13 @@ class AirQualitySensor extends IPSModule
 		$this->registerVariableInteger('airQuality', 'Air quality', 'AirQuality', 4);
 
 		// Create event
-		$eventId = IPS_CreateEvent(0);
-		IPS_SetParent($eventId, $this->InstanceID);
-		IPS_SetIdent($eventId, 'updateEvent');
-		IPS_SetName($eventId, "Update values");
+		if ($this->getUpdateEventId() == false)
+		{
+			$eventId = IPS_CreateEvent(0);
+			IPS_SetParent($eventId, $this->InstanceID);
+			IPS_SetIdent($eventId, 'updateEvent');
+			IPS_SetName($eventId, "Update values");
+		}
 	}
 
 	public function ApplyChanges()
@@ -120,7 +123,7 @@ class AirQualitySensor extends IPSModule
 		{
 			$this->setStatus(200);
 		}
-		
+
 		return $success;
 	}
 
@@ -140,7 +143,7 @@ class AirQualitySensor extends IPSModule
 
 	private function getUpdateEventId()
 	{
-		return IPS_GetObjectIDByIdent('updateEvent', $this->InstanceID);
+		return @IPS_GetObjectIDByIdent('updateEvent', $this->InstanceID);
 	}
 
 	private function hasUpdateEvent()
