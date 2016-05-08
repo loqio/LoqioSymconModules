@@ -74,11 +74,15 @@ class AirQualitySensor extends IPSModule
 			$airQualityIndex	= $this->getAirQualityIndex($voc);
 			//$airQualityDescription	= $this->getAirQualityDescription($airQualityIndex);
 
-			$this->setTemperature($temperature);
+
+			// Update humidity
+			IPS_LogMessage('Air quality sensor', 'instanceId: ' . $this->InstanceID . ' humidity: ' . $humidity . ' dew point: ' . $dewPoint . ' voc: ' . $voc . ' air quality index: ' . $airQualityIndex);
+
+			/*$this->setTemperature($temperature);
 			$this->setHumidity($humidity);
 			$this->setDewPoint($dewPoint);
 			$this->setVolatileOrganicCompounds($voc);
-			$this->setAirQualityIndex($airQualityIndex);
+			$this->setAirQualityIndex($airQualityIndex);*/
 
 			$success = true;
 
@@ -89,8 +93,7 @@ class AirQualitySensor extends IPSModule
 			$this->setStatus(200);
 		}
 
-		// Update humidity
-		IPS_LogMessage('Air quality sensor', 'instanceId: ' . $this->InstanceID);
+
 
 		return $success;
 	}
