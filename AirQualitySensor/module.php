@@ -35,6 +35,12 @@ class AirQualitySensor extends IPSModule
 		$this->registerVariableFloat('dewPoint', 'Dew point', '~Temperature', 2);
 		$this->registerVariableInteger('voc', 'Volatile organic compounds', 'VolatileOrganicCompounds', 3);
 		$this->registerVariableInteger('airQuality', 'Air quality', 'AirQuality', 4);
+
+		// Create event
+		$eventId = IPS_CreateEvent(0);
+		IPS_SetParent($eventId, $this->InstanceID);
+		IPS_SetIdent($eventId, 'updateEvent');
+		IPS_SetName($eventId, "Update values");
 	}
 
 	public function ApplyChanges()
@@ -47,11 +53,7 @@ class AirQualitySensor extends IPSModule
 			// Validate if compatible instance id was selected and set update event
 			if ($this->Update() == true)
 			{
-				// Set update event
-				if ($this->hasUpdateEvent() == false)
-				{
-					$this->setUpdateEvent();
-				}
+				$this->setUpdateEvent();
 			}
 		}
 
@@ -133,32 +135,21 @@ class AirQualitySensor extends IPSModule
 
 	private function setUpdateEvent()
 	{
-		$eventId = IPS_CreateEvent(0);
 		$variableId = $this->getTemperatureVariableId();
 
-		if ($eventId && $variableId)
+		if ($variableId)
 		{
+			$eventId = $this->getUpdateEventId();
+
 			IPS_SetEventTrigger($eventId, 0, $variableId);
-			IPS_SetParent($eventId, $this->InstanceID);
-			IPS_SetIdent($eventId, 'updateEvent');
 			IPS_SetEventActive($eventId, true);
 			IPS_SetEventScript($eventId, "AIRQ_Update(" . $this->InstanceID . ");");
-			IPS_SetName($eventId, "Update event");
 		}
 	}
 
 	private function getUpdateEventId()
 	{
-		$eventId = false;
-		$objectId = IPS_GetObjectIDByIdent('updateEvent', $this->InstanceID);
-		$object = IPS_GetObject($objectId);
-
-		if ($object['ObjectType'] == 4)
-		{
-			$eventId = $objectId;
-		}
-
-		return $eventId;
+		return IPS_GetObjectIDByIdent('updateEvent', $this->InstanceID);
 	}
 
 	private function hasUpdateEvent()
