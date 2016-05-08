@@ -12,7 +12,7 @@ class AirQualitySensor extends IPSModule
 		$this->RegisterPropertyInteger('sensorInstanceId', 0);
 
 		// Create variable profiles
-		if (IPS_GetVariableProfile('VolatileOrganicCompounds') == false)
+		if (@IPS_GetVariableProfile('VolatileOrganicCompounds') == false)
 		{
 			IPS_CreateVariableProfile('VolatileOrganicCompounds', 1);
 			IPS_SetVariableProfileText('VolatileOrganicCompounds', '', ' ppm');
@@ -20,7 +20,7 @@ class AirQualitySensor extends IPSModule
 			IPS_SetVariableProfileValues('VolatileOrganicCompounds', 0, 2000, 250);
 		}
 
-		if (IPS_GetVariableProfile('AirQuality') == false)
+		if (@IPS_GetVariableProfile('AirQuality') == false)
 		{
 			IPS_CreateVariableProfile('AirQuality', 1);
 			IPS_SetVariableProfileIcon('AirQuality', 'Climate');
