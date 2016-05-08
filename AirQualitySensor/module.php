@@ -54,7 +54,7 @@ class AirQualitySensor extends IPSModule
 		if ($sensorId = $this->ReadPropertyInteger('sensorInstanceId'))
 		{
 			// Validate if compatible instance id was selected and set update event
-			if ($this->Update() == true)
+			if ($this->ProcessValues() == true)
 			{
 				$this->setUpdateEvent();
 			}
@@ -64,7 +64,7 @@ class AirQualitySensor extends IPSModule
 	/** Processes sensor readings and updates the status variables
 	  * @return bool: true if successful, false on failure
 	  */
-	public function Update()
+	public function ProcessValues()
 	{
 		$success = false;
 
@@ -118,7 +118,7 @@ class AirQualitySensor extends IPSModule
 
 			IPS_SetEventTrigger($eventId, 0, $variableId);
 			IPS_SetEventActive($eventId, true);
-			IPS_SetEventScript($eventId, "AIRQ_Update(" . $this->InstanceID . ");");
+			IPS_SetEventScript($eventId, "AIRQ_ProcessValues(" . $this->InstanceID . ");");
 		}
 	}
 
@@ -261,4 +261,3 @@ class AirQualitySensor extends IPSModule
 		return $index;
 	}
 }
-?>
