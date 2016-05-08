@@ -5,8 +5,8 @@
   "vendor": "Loqio",
   "aliases":
   [
-    "EService Online 1Wire Luftqualitätssensor",
-    "EService Online 1Wire Air Quality Sensor"
+    "E-Service Online 1-Wire Luftqualitätssensor",
+    "E-Service Online 1-Wire Air Quality Sensor"
   ],
   "parentRequirements": [""],
   "childRequirements": [""],
