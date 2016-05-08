@@ -61,7 +61,7 @@ class AirQualitySensor extends IPSModule
 		$temperatureVariableId 	= $this->getTemperatureVariableId();
 		$xsensVariableId 		= $this->getXsensVariableId();
 
-		if ($vadVariableId && $$vddVariableId && $temperatureVariableId && $xsensVariableId)
+		if ($vadVariableId && $vddVariableId && $temperatureVariableId && $xsensVariableId)
 		{
 			$vad 				= GetValueFloat($vadVariableId);
 			$vdd 				= GetValueFloat($vddVariableId);
