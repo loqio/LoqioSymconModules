@@ -60,29 +60,11 @@ class AirQualitySensor extends IPSModule
 				$this->setUpdateEvent();
 			}
 		}
-
-		//$this->Compute($this->InstanceID);
-
-
-
-		//$this->sensorInstanceId = $this->ReadPropertyString("sensorInstance");
-
-		/*$updateClientsScript = file_get_contents(__DIR__ . "/createClientList.php");
-		$scriptID = $this->RegisterScript("updateClients", "updateClients", $updateClientsScript);
-		IPS_SetScriptTimer($scriptID, 60);
-
-		$updateWLANScript = file_get_contents(__DIR__ . "/createWLANList.php");
-		$scriptID = $this->RegisterScript("updateWLAN", "updateWLAN", $updateWLANScript);
-		IPS_SetScriptTimer($scriptID, 60);
-		$setWLANScript = file_get_contents(__DIR__ . "/setWLAN.php");
-		$this->RegisterScript("setWLAN", "setWLAN", $setWLANScript);
-
-
-		// Setzt den Intervall des Timers "Update" auf 5 Sekunden
-		$this->SetTimerInterval("Update", 3000);*/
-
 	}
 
+	/** Processes sensor readings and updates the status variables
+	  * @return bool: true if successful, false on failure
+	  */
 	public function Update()
 	{
 		$success = false;
@@ -106,12 +88,6 @@ class AirQualitySensor extends IPSModule
 			$dewPoint 			= $this->calculateDewPoint($temperature, $humidity);
 			$voc				= $this->calculateVolatileOrganicCompounds($xsens);
 			$airQualityIndex	= $this->getAirQualityIndex($voc);
-			//$airQualityDescription	= $this->getAirQualityDescription($airQualityIndex);
-
-
-			// Update humidity
-			IPS_LogMessage('Air quality sensor', 'instanceId: ' . $this->InstanceID . ' humidity: ' . $humidity . ' dew point: ' . $dewPoint . ' voc: ' . $voc . ' air quality index: ' . $airQualityIndex);
-
 
 			SetValueFloat($this->GetIDForIdent('temperature'), round($temperature, 1));
 			SetValueFloat($this->GetIDForIdent('humidity'), round($humidity, 1));
@@ -120,17 +96,19 @@ class AirQualitySensor extends IPSModule
 			SetValueInteger($this->GetIDForIdent('airQuality'), $airQualityIndex);
 
 			$success = true;
-
 			$this->SetStatus(102);
 		}
 		else
 		{
+			// Incompatible instance
 			$this->setStatus(200);
 		}
 
 		return $success;
 	}
 
+	/** Sets the source variable and action of the trigger event
+	  */
 	private function setUpdateEvent()
 	{
 		$variableId = $this->getXsensVariableId();
