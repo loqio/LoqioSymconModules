@@ -12,6 +12,8 @@
  * @copyright Copyright (c) 2016 Femme Taken, Loqio Building Controls
  */
 
+//require_once( __DIR__  . '/PhpSpreadsheet/src/Autoloader.php');
+require_once __DIR__ . '/PhpSpreadsheet/src/Bootstrap.php';
 
 class SpreadsheetReader extends IPSModule
 {
@@ -42,8 +44,6 @@ class SpreadsheetReader extends IPSModule
 
 	public function getSpreadsheet()
 	{
-		require_once('PhpSpreadsheet/src/Autoloader.php');
-
 		$output 		= '';
 		$tempFilename 	= tempnam(sys_get_temp_dir(), 'spreadsheet-' . time());
 		$url 			= IPS_GetProperty($this->InstanceID, 'spreadsheetUrl');
