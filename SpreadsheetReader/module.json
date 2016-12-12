@@ -1,0 +1,14 @@
+{
+  "id": "{C4DF9B9C-5A97-4660-8261-38C981C64C2C}",
+  "name": "SpreadsheetReader",
+  "type": 3,
+  "vendor": "Loqio",
+  "aliases":
+  [
+    "Loqio Spreadsheet Reader"
+  ],
+  "parentRequirements": [""],
+  "childRequirements": [""],
+  "implemented": [""],
+  "prefix": "SPREADSHEETREADER"
+}

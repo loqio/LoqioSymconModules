@@ -1,0 +1,31 @@
+{
+    "elements":
+    [
+        { "type": "Label", "label": "Select the temperature input variable." },
+        { "type": "SelectVariable", "name": "temperatureVariableId", "caption": "Temperature" },
+
+        { "type": "Label", "label": "Select the outputs that control base heating, additional heating and cooling. Use a virtual output module to control multiple instances at once:" },
+        { "type": "SelectInstance", "name": "baseHeatingInstanceId", "caption": "Base Heating" },
+        { "type": "SelectInstance", "name": "additionalHeatingInstanceId", "caption": "Additional heating" },
+        { "type": "SelectInstance", "name": "coolingInstanceId", "caption": "Cooling" },
+
+        { "type": "NumberSpinner", "name": "hysteresis", "caption": "Hysteresis (°C)", "digits": 2},
+
+        { "type": "Label", "label": "Select boolean variable that controls temperature setback to lower the temperature when there is no presence. Select none to disable temperature setback:" },
+        { "type": "SelectVariable", "name": "setbackInputStatusVariableId", "caption": "Setback input" },
+
+        { "type": "Label", "label": "Select the Thermal Supply Control module to which the temperature control module reports:" },
+        { "type": "SelectInstance", "name": "thermalSupplyControlInstanceId", "caption": "ThermalSupplyControl" }
+    ],
+        "status":
+    [
+        { "code": 102, "icon": "active", "caption": "Valid instance" },
+        { "code": 200, "icon": "error", "caption": "Loqio Framework core module is not installed" },
+        { "code": 201, "icon": "error", "caption": "Invalid Thermal Supply Control module instance" },
+        { "code": 202, "icon": "error", "caption": "Parent object must be instance of Zone module" },
+        { "code": 203, "icon": "error", "caption": "Invalid temperature input" },
+        { "code": 204, "icon": "error", "caption": "Invalid base heating output" },
+        { "code": 205, "icon": "error", "caption": "Invalid additional heating output" },
+        { "code": 206, "icon": "error", "caption": "Invalid cooling output" }
+    ]
+}
