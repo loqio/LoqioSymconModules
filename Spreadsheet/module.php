@@ -65,23 +65,31 @@ class SpreadsheetReader extends IPSModule
 		$spreadsheet = $objReader->load("test.xlsx");*/
 
 		$objWorksheet = $spreadsheet->getActiveSheet();
+		$maxIterations = 2048;
+		$totalIterations = 0;
 
 		foreach ($objWorksheet->getRowIterator() as $r => $row)
 		{
-			$cellIterator = $row->getCellIterator();
-			//$cellIterator->setIterateOnlyExistingCells(false); // This loops through all cells,
-			//    even if a cell value is not set.
-			// By default, only cells that have a value
-			//    set will be iterated.
-			foreach ($cellIterator as $i => $cell)
+			if ($totalIterations < $maxIterations)
 			{
-				$value = $cell->getValue();
-
-				if (!empty($value))
+				$cellIterator = $row->getCellIterator();
+				//$cellIterator->setIterateOnlyExistingCells(false); // This loops through all cells,
+				//    even if a cell value is not set.
+				// By default, only cells that have a value
+				//    set will be iterated.
+				foreach ($cellIterator as $i => $cell)
 				{
-					$output .= $r . '-' . $i . ': ' . $value . "\n";
+					$value = $cell->getValue();
+
+					if (!empty($value))
+					{
+						$output .= $r . '-' . $i . ': ' . $value . "\n";
+						$totalIterations++;
+					}
 				}
 			}
+
+
 		}
 
 		// Store output in local value
