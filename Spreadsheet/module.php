@@ -65,7 +65,7 @@ class SpreadsheetReader extends IPSModule
 		$spreadsheet = $objReader->load("test.xlsx");*/
 
 		$objWorksheet = $spreadsheet->getActiveSheet();
-		$maxIterations = 2048;
+		$maxIterations = 512;
 		$totalIterations = 0;
 
 		foreach ($objWorksheet->getRowIterator() as $r => $row)
@@ -84,8 +84,9 @@ class SpreadsheetReader extends IPSModule
 					if (!empty($value))
 					{
 						$output .= $r . '-' . $i . ': ' . $value . "\n";
-						$totalIterations++;
 					}
+
+					$totalIterations++;
 				}
 			}
 
