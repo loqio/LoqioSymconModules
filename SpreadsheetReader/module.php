@@ -37,8 +37,7 @@ class SpreadsheetReader extends IPSModule
 	{
 		parent::applyChanges();
 
-		//$this->getModel()->applyChanges();
-		//$this->getModel()->validateProperties();
+		$this->SetStatus(102);
 	}
 
 	public function getSpreadsheet()
