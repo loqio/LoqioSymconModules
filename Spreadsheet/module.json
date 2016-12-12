@@ -1,5 +1,5 @@
 {
-  "id": "{C522361E-6F23-4DA9-8B37-C2D31CF7A134}",
+  "id": "{6632E0E6-9F6B-4055-B84C-C4D95ED40AEA}",
   "name": "SpreadsheetReader",
   "type": 3,
   "vendor": "Loqio",
@@ -10,5 +10,5 @@
   "parentRequirements": [""],
   "childRequirements": [""],
   "implemented": [""],
-  "prefix": "SPREADSHEETREADER"
+  "prefix": "SPREADSHEET"
 }
