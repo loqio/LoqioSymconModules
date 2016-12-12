@@ -48,14 +48,11 @@ class SpreadsheetReader extends IPSModule
 		$tempFilename 	= tempnam(sys_get_temp_dir(), 'spreadsheet-' . time());
 		$url 			= IPS_GetProperty($this->InstanceID, 'spreadsheetUrl');
 
+		// Store file locally
 		file_put_contents($tempFilename, file_get_contents($url));
 
 
-		//	'https://www.apxgroup.com/wp-content/uploads/marketdata/powernl/public/results_dam_nl/APX_Daily_Market_Results.xls';
-
-		// Store locally
-
-		//$inputFileName = './sampleData/example1.xls';
+		//'https://www.apxgroup.com/wp-content/uploads/marketdata/powernl/public/results_dam_nl/APX_Daily_Market_Results.xls';
 
 		/** Load $inputFileName to a Spreadsheet Object  **/
 		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($tempFilename);
@@ -64,8 +61,8 @@ class SpreadsheetReader extends IPSModule
 		$objReader->setReadDataOnly(TRUE);
 		$spreadsheet = $objReader->load("test.xlsx");*/
 
-		$objWorksheet = $spreadsheet->getActiveSheet();
-		$maxIterations = 2048;
+		//$objWorksheet = $spreadsheet->getActiveSheet();
+		/*$maxIterations = 2048;
 		$totalIterations = 0;
 
 		foreach ($objWorksheet->getRowIterator() as $r => $row)
@@ -97,8 +94,9 @@ class SpreadsheetReader extends IPSModule
 		if ($variableId = $this->GetIDForIdent('output'))
 		{
 			SetValue($variableId, $output);
-		}
+		}*/
 
-		echo $output;
+		return $spreadsheet;
+		//echo $output;
 	}
 }
