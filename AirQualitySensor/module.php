@@ -89,10 +89,14 @@ class AirQualitySensor extends IPSModule
 			$airQualityIndex	= $this->getAirQualityIndex($voc);
 
 			SetValueFloat($this->GetIDForIdent('temperature'), round($temperature, 1));
-			SetValueFloat($this->GetIDForIdent('humidity'), round($humidity, 1));
 			SetValueFloat($this->GetIDForIdent('dewPoint'), round($dewPoint, 1));
 			SetValueInteger($this->GetIDForIdent('voc'), round($voc));
 			SetValueInteger($this->GetIDForIdent('airQuality'), $airQualityIndex);
+
+			if ($humidity)
+			{
+				SetValueFloat($this->GetIDForIdent('humidity'), round($humidity, 1));
+			}
 
 			$success = true;
 			$this->SetStatus(102);
@@ -178,7 +182,8 @@ class AirQualitySensor extends IPSModule
 	  * @param float $vdd: sensor supply voltage
 	  * @param float $vad: sensor analog voltage reading
 	  * @param float $temperature: temperature reading from sensor
-	  * @return float
+	 *
+	  * @return bool|float: return false if invalid value was calculated
 	  */
 	private function calculateHumidity($vdd, $vad, $temperature)
 	{
@@ -194,7 +199,7 @@ class AirQualitySensor extends IPSModule
 		$srh = ($vad - $offset) / ($slope / 1000); // Correction factor
 		$humidity = ($srh + $correction) / ((1.0305 + (0.000044 * $temperature) - (0.0000011 * pow($temperature, 2))));
 
-		return $humidity;
+		return $humidity <= 100 ? $humidity : false;
 	}
 
 	/** Calculates dew point using temperature and humidity
