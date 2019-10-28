@@ -1,9 +1,9 @@
 {
-  "id": "{AFFD9A32-63C7-463B-BE3B-C70917E0F128}",
-  "author": "Femme Taken",
-  "name": "Loqio modules for IP-Symcon",
-  "url": "https://github.com/loqio/LoqioSymconModules",
-  "version": "0.1",
-  "build": 0,
-  "date": 0
+  "id"      : "{AFFD9A32-63C7-463B-BE3B-C70917E0F128}",
+  "author"  : "Femme Taken",
+  "name"    : "Loqio modules for IP-Symcon",
+  "url"     : "https://github.com/loqio/LoqioSymconModules",
+  "version" : "0.2",
+  "build"   : 0,
+  "date"    : 0
 }

@@ -1,15 +1,11 @@
 {
-  "id": "{45998026-7967-4BF1-97FC-C293CA7059CB}",
-  "name": "AirQualitySensor",
-  "type": 3,
-  "vendor": "Loqio",
-  "aliases":
-  [
-    "E-Service Online Luftgüte-, Temp + Feuchtesensor V2",
-    "E-Service Online Air quality, temperature and humidity sensor"
-  ],
-  "parentRequirements": [""],
-  "childRequirements": [""],
-  "implemented": [""],
-  "prefix": "AIRQ"
+  "id"                : "{45998026-7967-4BF1-97FC-C293CA7059CB}",
+  "name"              : "AirQualitySensor",
+  "type"              : 3,
+  "vendor"            : "Loqio",
+  "aliases"           : ["Esera Luftgüte-, Temp + Feuchtesensor V2", "Esera Air quality, temperature and humidity sensor"],
+  "parentRequirements": [],
+  "childRequirements" : [],
+  "implemented"       : [],
+  "prefix"            : "AIRQ"
 }
